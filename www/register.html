@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" class="app">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/font.css" type="text/css" />
+  <link rel="stylesheet" href="css/app.css" type="text/css" />
+  <script src="js/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="js/ie/html5shiv.js"></script>
+    <script src="js/ie/respond.min.js"></script>
+    <script src="js/ie/excanvas.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <section class="vbox">
+    <header class="bg-dark dk header navbar navbar-fixed-top-xs">
+      <div class="navbar-header aside-md">
+        <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
+          <i class="fa fa-bars"></i>
+        </a>
+        <a href="index.html" class="navbar-brand" data-toggle="fullscreen"><img src="images/logo.png" class="m-r-sm">Protrack</a>
+        <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user">
+          <i class="fa fa-cog"></i>
+        </a>
+      </div>      
+    </header>
+    <section>
+      <section class="hbox stretch">
+        
+        <section id="content">
+          <section class="vbox">          
+            <section class="scrollable padder" id="load_content">
+              <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+                <li><a data-link="dashboard.php" href="index.html"><i class="fa fa-home"></i> HOME</a></li>
+                <li class="active">REGISTER</li>
+              </ul>
+              
+              <section class="panel panel-default">
+                <header class="panel-heading font-bold">REGISTER ACCOUNT</header>
+                <div class="panel-body">
+                  <form role="form" class="form-horizontal" name="create_member_form" id="create_member_form">
+                    <input type="hidden" name="actions" id="actions" value="mobile_create_member">
+                    <input type="hidden" name="client_id" id="client_id" value="1">
+                    <input type="hidden" name="device" id="device" value="mobile" />
+                    <input type="hidden" name="token" id="token" value="" />
+                    <input type="hidden" name="device_platform" id="device_platform" value="" />
+                    <input type="hidden" name="device_model" id="device_model" value="" />
+                    <input type="hidden" name="device_version" id="device_version" value="" />
+              
+                    <div class="col-sm-10">
+                      <div class="row"><h4>PERSONAL DETAILS</h4></div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label>TITLE</label>
+                            <select name="title" id="title" class="form-control required_field" data_error="Please select a title/salutaion">
+                              <option value=''>--SELECT TITLE/SALUTATION--</option>
+                              <option value="MR">MR</option>
+                              <option value="MRS">MRS</option>
+                              <option value="MS">MS</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-4">
+                            <label>FIRST NAME</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in your first name" name="name" id="name" placeholder="Enter first name" value="">
+                          </div>
+                          <div class="col-sm-4">
+                            <label>SURNAME</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in a surname " name="surname" id="surname" placeholder="Enter surname"  value="">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <label>D.O.B</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in a date of birth " name="birthdate" id="birthdate" placeholder="YYYY-MM-DD"  value="">
+                          </div>
+                          <div class="col-sm-6">
+                            <label>ID NUMBER</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in a national ID number" name="idnumber" id="idnumber" placeholder="Enter a national ID number"  value="">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              
+                    <div class="col-sm-10">
+                      <div class="row"><h4>CONTACT DETAILS</h4></div>
+                    </div>
+              
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <label>ADDRESS</label>
+                        <textarea class="form-control" class="form-control required_field" data_error="Please fill in an address" name="address" id="address" placeholder="Enter home address"></textarea>
+                      </div>
+                    </div>
+              
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <label>AREA</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in address area e.g Greendale, Hatfield..."  name="area" id="area" placeholder="e.g Greendale, Hatfield" value="">
+                          </div>
+                          <div class="col-sm-6">
+                            <label>CITY</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in the address city e.g Harare, Bulawayo, Mutare..." name="city" id="city" placeholder="e.g Harare, Bulawayo, Mutare ...." value="">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <label>MOBILE</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in mobile number e.g +263773987..." name="mobile" id="mobile" placeholder="e.g +263773987...." value="">
+                          </div>
+                          <div class="col-sm-6">
+                            <label>EMAIL</label>
+                            <div class="input-group m-b">
+                              <span class="input-group-addon">@</span>
+                              <input type="email" class="form-control" data_error="Please fill in email address." name="email" id="email" placeholder="Enter email" value="">
+                            </div>              
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              
+                    <div class="col-sm-10">
+                      <div class="row"><h4>COURSE DETAILS</h4></div>
+                    </div>
+              
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <label>COURSE NAME: <b>THE ORDER OF MELCHIZEDEK</b></label>
+                          </div>
+                          <div class="col-sm-6">
+                            <label>COURSE FEE: <b>$199</b></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <label>YEAR</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in mobile number e.g +263773987..." name="year" id="year" placeholder="" value="2016">
+                          </div>
+                          <div class="col-sm-4">
+                            <label>PERIOD/TERM</label>
+                            <select name="period" id="period" class="form-control required_field" data_error="Please select the period/term you want to register for">
+                              <option value=''>--SELECT PERIOD/TERM--</option>
+                              <option value="0">JANUARY</option>
+                              <option value="1">FEBUARY</option>
+                              <option value="1">MARCH</option>
+                              <option value="1">APRIL</option>
+                              <option value="1">MAY</option>
+                              <option value="1">JUNE</option>
+                              <option value="1">JULY</option>
+                              <option value="1">AUGUST</option>
+                              <option value="1">SEPTEMBER</option>
+                              <option value="1">NOVEMBER</option>
+                              <option value="1">DECEMBER</option>
+                              <option value="1">FEBUARY</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-10">
+                      <div class="row"><h4>PAYMENT DETAILS</h4></div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <label>CARD #</label>
+                            <input type="text" class="form-control required_field" data_error="Please fill in card number."  name="card_number" id="card_number" placeholder="" value="">
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <label>MONTH</label>
+                                <select name="ex_month" id="ex_month" class="form-control required_field" data_error="Please select the month the card expires">
+                                  <option value=''>----</option>
+                                  <option value="0">01</option>
+                                  <option value="1">02</option>
+                                  <option value="1">03</option>
+                                  <option value="1">04</option>
+                                  <option value="1">05</option>
+                                  <option value="1">06</option>
+                                  <option value="1">07</option>
+                                  <option value="1">08</option>
+                                  <option value="1">09</option>
+                                  <option value="1">10</option>
+                                  <option value="1">11</option>
+                                  <option value="1">12</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-3">
+                                <label>YEAR</label>
+                                <select name="ex_year" id="ex_year" class="form-control required_field" data_error="Please select the year the card expires">
+                                  <option value=''>----</option>
+                                  <option value="0">2016</option>
+                                  <option value="1">2017</option>
+                                  <option value="1">2018</option>
+                                  <option value="1">2019</option>
+                                  <option value="1">2020</option>
+                                  <option value="1">2021</option>
+                                  <option value="1">2022</option>
+                                  <option value="1">2023</option>
+                                  <option value="1">2024</option>
+                                  <option value="1">2025</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <button type="reset" class="btn btn-sm btn-default">RESET</button>
+                            <button type="submit" id="submit" class="btn btn-sm btn-primary">REGISTER</button>
+                            <img src='images/loaders/indicator-lite.gif' class='m-r-sm form-progress hide'>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </form>
+                </div>
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+  
+  <script src="js/bootstrap.js"></script>
+  <!-- App -->
+  
+  <script src="js/app_.js"></script>
+  <script src="js/app.plugin.js"></script>
+  <script src="js/slimscroll/jquery.slimscroll.min.js"></script>  
+  
+  <script>
+    var deploy_device   = "desktop";
+    var request_url     = "http://127.0.0.1/secure/server_side/request.php";
+
+    if(deploy_device == "mobile"){
+      window.onload = init;
+    }
+
+    function load_modal(content, title){
+      $('#ajaxModal').remove();
+      var $remote  = "modal.html";
+      var $modal   = $('<div class="modal" id="ajaxModal"><div class="modal-body"></div></div>');
+      $('body').append($modal);
+      $modal.modal();
+      $modal.load($remote, function(){
+        $(".modal-title").html(title);
+        $(".modal-body").html(content);    
+      });  
+    }
+
+    function err_string(err){
+      var string =  '<span class="fa-stack fa-2x pull-left m-r-sm">'+
+                    '<i class="fa fa-circle fa-stack-2x text-danger"></i>'+
+                    '<i class="fa fa-times fa-stack-1x text-white"></i>'+
+                    '</span>'+
+                    '<div class="clear"><p>'+err+'</p></div>';
+      return string;
+    }
+
+    function success_string(err){
+      var string =  '<span class="fa-stack fa-2x pull-left m-r-sm">'+
+                    '<i class="fa fa-circle fa-stack-2x text-success"></i>'+
+                    '<i class="fa fa-check fa-stack-1x text-white"></i>'+
+                    '</span>'+
+                    '<div class="clear"><p>'+err+'</p></div>';
+      return string;
+    }
+
+    function info_string(err){
+      var string =  '<span class="fa-stack fa-2x pull-left m-r-sm">'+
+                    '<i class="fa fa-circle fa-stack-2x text-info"></i>'+
+                    '<i class="fa fa-info fa-stack-1x text-white"></i>'+
+                    '</span>'+
+                    '<div class="clear"><p>'+err+'</p></div>';
+      return string;
+    }
+
+    function query_server(post_data, method, result){
+      if(method == "POST"){
+        $.post(request_url+"?data="+btoa(post_data), function(data) {
+          var info = $.parseJSON(data);
+          window[result](info);
+          $('#submit').prop("disabled", false);  
+        }).fail(function(data) {
+          console.log("ERROR POSTING DETAILS");
+          load_modal(err_string("ERROR PROCESSING YOUR REQUEST. PLEASE TRY LATER."), "ERROR");
+          $('#submit').prop("disabled", false); 
+        });    
+      }
+
+      if(method == "GET"){
+        $.post(request_url+"?data="+btoa(post_data), function(data) {
+          var info = $.parseJSON(atob(data));
+          $('#submit').prop("disabled", false); 
+          window[result](info);
+        }).fail(function(data) {
+          console.log("ERROR POSTING DETAILS");
+          load_modal(err_string("ERROR PROCESSING YOUR REQUEST. PLEASE TRY LATER."), "ERROR");
+          $('#submit').prop("disabled", false); 
+        });    
+      }
+    }
+
+    function create_member_result(data){
+      $(".form-progress").addClass("hide");
+      $('#submit').prop("disabled", false); 
+      if(data){
+        if (data.hasOwnProperty("query_status")){
+          if(data.query_status == 0){
+            load_modal(err_string(data.msg), "REGISTER");
+          }
+          if(data.query_status == 1){
+            load_modal(success_string(data.msg), "REGISTER");
+            $("#create_member_form").trigger("reset");
+          }
+          if(data.query_status == 2){
+            load_modal(info_string(data.msg), "REGISTER");
+          }
+        }else{
+          load_modal(err_string("THERE WAS AN ERROR PROCESSING YOUR REQUEST. PLEASE CHECK YOUR INTERNET CONNECTION"), "REGISTER");
+        }
+      }else{
+        load_modal(err_string("THERE WAS AN ERROR PROCESSING YOUR REQUEST. PLEASE CHECK YOUR INTERNET CONNECTION"), "REGISTER");
+        $('#submit').prop("disabled", false);  
+      }
+    }
+
+
+    //CREATE MEMBER
+    $(document).on('submit', '#create_member_form', function(e) {
+      var current_form = "#create_member_form";
+      $("#submit").prop("disabled", true);
+      $(".form-progress").removeClass("hide");
+      
+      //validate
+      $(current_form+' .required_field').each(function(i){
+                 
+        if($(this).val() == ''){
+          var err_message = $(this).attr('data_error');
+          $('#submit').prop("disabled", false);  
+          $(".form-progress").addClass("hide");
+          load_modal(info_string(err_message), "REGISTER");
+          return false;            
+        };  
+            
+        if($(this).hasClass('required_email')){         
+          var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+          var tempField = '#' + $(this).attr('id');       
+          if(!emailReg.test($(tempField).val())) {
+            var err_message = "Please fill in a valid email address";
+            $('#submit').prop("disabled", false);  
+          $(".form-progress").addClass("hide");
+            load_modal(info_string(err_message), "REGISTER");
+            return false;
+          }    
+        }
+              
+        if(i == $(current_form+' .required_field').length - 1){
+          
+          var post_data = $(current_form).serialize();
+          query_server(post_data, "POST", "create_member_result");
+          
+        }       
+      });
+        
+      return false;
+    });
+  </script>
+
+</body>
+</html>

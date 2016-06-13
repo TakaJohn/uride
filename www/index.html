@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en" class="app">
+<head>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="Content-Security-Policy" content="default-src*; style-src'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/> 
+  <title></title>
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/font.css" type="text/css" />
+  <link rel="stylesheet" href="js/select2/theme.css" type="text/css">
+  <link rel="stylesheet" href="js/select2/select2.css" type="text/css">
+  <link rel="stylesheet" href="js/calendar/bootstrap_calendar.css" type="text/css" />
+  <link rel="stylesheet" href="js/fullcalendar/fullcalendar.css" type="text/css"  />
+  <link rel="stylesheet" href="js/fullcalendar/theme.css" type="text/css" />
+  <link rel="stylesheet" href="js/ui/css/jquery.ui.all.css" type="text/css" />
+  <link rel="stylesheet" href="js/fuelux/fuelux.css" type="text/css"/>
+  <link rel="stylesheet" href="js/datepicker/datepicker.css" type="text/css">
+  <link rel="stylesheet" href="css/app.css" type="text/css" /> 
+  <link rel="stylesheet" href="js/TimeCircles.css" type="text/css" /> 
+
+  <script src="cordova.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/PushNotification.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyATKM97y1jeNjfGRzLCnBHg0zUq7XNhVC8&signed_in=true"></script>
+  
+
+  <!-- pusher
+  <script src="js/pusher.min.js"></script>
+  <script src="js/pusher_functions.js"></script>
+  -->
+
+  
+  <!--[if lt IE 9]>
+    <script src="js/ie/html5shiv.js"></script>
+    <script src="js/ie/respond.min.js"></script>
+    <script src="js/ie/excanvas.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <section class="vbox">
+    <header class="bg-dark dk header navbar navbar-fixed-top-xs">
+      <div class="navbar-header aside-md">
+        <a class="btn btn-link visible-xs mobile-home-btn" data-target="#nav,html">
+          <i class="fa fa-chevron-left"></i>
+        </a>
+        <a href="#" class="navbar-brand" data-toggle="fullscreen">
+        <img src="images/logo.png" class="m-r-sm">Uride</a>
+        <!-- <a class="btn btn-link visible-xs profile-cog hide" data-toggle="dropdown" data-target=".nav-user">
+          <i class="fa fa-cog"></i>
+        </a> -->
+      </div>      
+    </header>
+    <section>
+      <section class="hbox stretch">
+        <section id="content">
+          <section class="vbox">          
+            <section class="scrollable padder" id="load_content">
+              <div class="m-b-md"></div>
+              <!--home-->
+              <div class="row home-row m-b-md hide">
+                <div class="m-t-xl m-b-xl text-center">
+                  <img src="images/home_image.png" class="" style="width:100%">    
+                </div>
+                <!--inactive user menu-->
+                <div class="inactive-user text-center hide">
+                  <div class="col-sm-12">
+                    <div class="doc-buttons">               
+                      <a href="#" class="btn btn-s-md btn-primary nav" nav-link="register-row">Register</a>
+                      <a href="#" class="btn btn-s-md btn-info nav" nav-link="login-row">Login</a>
+                    </div>
+                  </div>      
+                </div>
+                <!--active user menu-->
+                <div class="active-user hide">
+                  <div class="col-sm-12">
+                    <ul class="list-group alt">
+                      <li class="list-group-item">
+                        <div class="media">
+                          <a href="#" class="nav" nav-link="drivers-row">
+                            <span class="pull-left thumb-sm"><i class="fa fa-bullhorn fa-3x icon-muted"></i></span>
+                            <div class="pull-right text-warning m-t-sm">
+                              <i class="fa fa-circle"></i>
+                            </div>
+                            <div class="media-body">
+                              <div>Get a ride</div>
+                              <small class="text-muted">Need to get some where</small>
+                            </div>
+                          </a>
+                        </div>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="media">
+                          <a href="#" class="nav" nav-link="chats-row">
+                            <span class="pull-left thumb-sm"><i class="fa fa-comments-o fa-3x icon-muted"></i></span>
+                            <div class="pull-right text-success m-t-sm">
+                              <i class="fa fa-circle"></i>
+                            </div>
+                            <div class="media-body">
+                              <div>Chats</div>
+                              <small class="text-muted">Your chat history</small>
+                            </div>
+                          </a>
+                        </div>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="media">
+                          <a href="#" class="nav" nav-link="profile-row">
+                            <span class="pull-left thumb-sm"><i class="fa fa-user fa-3x icon-muted"></i></span>
+                            <div class="pull-right text-muted m-t-sm">
+                              <i class="fa fa-circle"></i>
+                            </div>
+                            <div class="media-body">
+                              <div>Account</div>
+                              <small class="text-muted">Your account details</small>
+                            </div>
+                          </a>
+                        </div>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="media">
+                          <a href="#" class="nav" data-link="driver_mode">
+                            <span class="pull-left thumb-sm "><i class="fa fa-road fa-3x icon-muted"></i></span>
+                            <div class="pull-right text-info m-t-sm">
+                              <i class="fa fa-circle"></i>
+                            </div>
+                            <div class="media-body">
+                              <div class="driver-mode-txt">Driver Mode</div>
+                              <small class="text-muted">Activate driver mode and get ride requests</small>
+                            </div>
+                          </a>
+                        </div>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="media">
+                          <a href="#" class="nav" nav-link="logout-row">
+                            <span class="pull-left thumb-sm text-danger"><i class="fa fa-lock fa-3x icon-muted"></i></span>
+                            <div class="pull-right text-danger m-t-sm">
+                              <i class="fa fa-circle"></i>
+                            </div>
+                            <div class="media-body">
+                              <div>Logout</div>
+                              <small class="text-muted">Close your session with uride</small>
+                            </div>
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--profile-->
+              <div class="row profile-row m-b-md hide">
+                <section class="panel panel-default">
+                  <header class="panel-heading font-bold">Account</header>
+                  <div class="panel-body">
+                    <form role="form" class="form-horizontal" name="update_user" id="update_user">
+                      <input type="hidden" class="ignore" name="actions" id="actions" value="update_user">
+                      <input type="hidden" class="ignore" name="action_title" id="action_title" value="PROFILE">
+                      <input type="hidden" class="ignore" name="user_id" id="user_id" value="">
+                      <input type="hidden" class="ignore" name="device" id="device" value="mobile" />
+                      <input type="hidden" class="ignore" name="token" id="token" value="" />
+                      <input type="hidden" class="ignore" name="device_platform" id="device_platform" value="" />
+                      <input type="hidden" class="ignore" name="device_model" id="device_model" value="" />
+                      <input type="hidden" class="ignore" name="device_version" id="device_version" value="" />
+                      <input type="hidden" class="ignore required_field" data_error="Please attach picture of student id" name="id_card_uri_check" id="id_card_uri_1_check" value="" />
+                      <input type="hidden" class="ignore required_field" data_error="Please attach picture of your car" name="car_uri_check" id="car_uri_1_check" value="" />
+                      <input type="hidden" data_error="Please attach picture of your license" class="ignore required_field" name="license_uri_check" id="license_uri_1_check" value="" />
+
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>TITLE</label>
+                              <select name="title" id="title" class="form-control required_field" data_error="Please select your title Mr or Mrs">
+                                <option value=''>--SELECT TITLE/SALUTATION--</option>
+                                <option value="MR">MR</option>
+                                <option value="MRS">MRS</option>
+                                <option value="MS">MS</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>FIRST NAME</label>
+                              <input type="text" class="form-control required_field" data_error="Please fill in your first name" name="name" id="name" placeholder="Enter your first name" value="">
+                            </div>
+                            <div class="col-sm-6">
+                              <label>SURNAME</label>
+                              <input type="text" class="form-control required_field" data_error="Please fill in your surname " name="surname" id="surname" placeholder="Enter your surname"  value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>STUDENT ID</label>
+                              <input type="text" name="student_id" id="student_id" class="form-control required_field" data_error="Please fill in your student id number" value="">
+                            </div>
+                            <div class="col-sm-6">
+                              <label>MOBILE</label>
+                              <input type="text" name="mobile" id="mobile" class="form-control required_field" data_error="Please fill in your mobile number" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>STUDENT ID PIC</label><br>
+                              <button class="btn btn-default btn-info btn-md pic-upload" id="id_card_uri_1">
+                                <i class="fa fa-file-o text"></i>
+                                <span class="text">BROWSE</span>
+                              </button>
+                              <span class="text-mute hide id_card_uri_1_progress"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <h4>DRIVER DETAILS</h4>
+                          <p>To become a Uride driver please fill in your drivers details and attach all required images and you will be able to pick and drop around compass.</p>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>VEHICLE REG #</label>
+                              <input type="text" name="car_reg" id="car_reg" class="form-control required_field" data_error="Please fill in the vehicle reg number" value="">
+                            </div>
+                            <div class="col-sm-6">
+                              <label>CAR PICTURE</label><br>
+                              <button class="btn btn-default btn-info btn-md pic-upload" id="car_uri_1">
+                                <i class="fa fa-file-o text"></i>
+                                <span class="text">BROWSE</span>
+                              </button>
+                              <span class="text-mute hide car_uri_1_progress"></span>
+                            </div>                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>DRIVERS LICENSE</label><br>
+                              <button class="btn btn-default btn-info btn-md pic-upload" id="license_uri_1">
+                                <i class="fa fa-file-o text"></i>
+                                <span class="text">BROWSE</span>
+                              </button>
+                              <span class="text-mute hide license_uri_1_progress"></span>
+                            </div>                            
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <label>USERNAME</label>
+                              <input type="text" class="form-control required_field" name="username" id="username" data_error="Please fill in your username" placeholder="" value="">
+                            </div>
+                            <div class="col-xs-6">
+                              <label>PASSWORD</label>
+                              <input type="password" class="form-control" name="pswd" id="pswd" data_error="Please fill in your password" placeholder="" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-10">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" id="submit" class="btn btn-md btn-primary">SUBMIT</button>
+                                <img src='images/loaders/indicator-lite.gif' class='m-r-sm form-progress hide'>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </section>
+              </div>
+
+              <!--register-->
+              <div class="row register-row m-b-md hide">
+                <section class="panel panel-default">
+                  <header class="panel-heading font-bold">Register</header>
+                  <div class="panel-body">
+                    <form role="form" class="form-horizontal" name="register" id="register">
+                      <input type="hidden" class="ignore" name="actions" id="actions" value="register">
+                      <input type="hidden" class="ignore" name="action_title" id="action_title" value="REGISTER">
+                      <input type="hidden" class="ignore" name="device" id="device" value="mobile" />
+                      <input type="hidden" class="ignore" name="token" id="token" value="" />
+                      <input type="hidden" class="ignore" name="device_platform" id="device_platform" value="" />
+                      <input type="hidden" class="ignore" name="device_model" id="device_model" value="" />
+                      <input type="hidden" class="ignore" name="device_version" id="device_version" value="" />
+                      <input type="hidden" class="ignore required_field" data_error="Please attach picture of student id" name="id_card_uri_check" id="id_card_uri_check" value="" />
+
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>TITLE</label>
+                              <select name="title" id="title" class="form-control required_field" data_error="Please select your title Mr or Mrs">
+                                <option value=''>--SELECT TITLE/SALUTATION--</option>
+                                <option value="MR">MR</option>
+                                <option value="MRS">MRS</option>
+                                <option value="MS">MS</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>FIRST NAME</label>
+                              <input type="text" class="form-control required_field" data_error="Please fill in your first name" name="name" id="name" placeholder="Enter your first name" value="">
+                            </div>
+                            <div class="col-sm-6">
+                              <label>SURNAME</label>
+                              <input type="text" class="form-control required_field" data_error="Please fill in your surname " name="surname" id="surname" placeholder="Enter your surname"  value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>STUDENT ID</label>
+                              <input type="text" name="student_id" id="student_id" class="form-control required_field" data_error="Please fill in your student id number" value="">
+                            </div>
+                            <div class="col-sm-6">
+                              <label>MOBILE</label>
+                              <input type="text" name="mobile" id="mobile" class="form-control required_field" data_error="Please fill in your mobile number" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>STUDENT ID PIC</label><br>
+                              <button class="btn btn-default btn-info btn-md pic-upload" id="id_card_uri">
+                                <i class="fa fa-file-o text"></i>
+                                <span class="text">BROWSE</span>
+                              </button>
+                              <span class="text-mute hide id_card_uri_progress"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <label>USERNAME</label>
+                              <input type="text" class="form-control required_field" name="username" id="username" data_error="Please fill in your username" placeholder="" value="">
+                            </div>
+                            <div class="col-xs-6">
+                              <label>PASSWORD</label>
+                              <input type="password" class="form-control required_field" name="pswd" id="pswd" data_error="Please fill in your password" placeholder="" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-10">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" id="submit" class="btn btn-md btn-primary">SUBMIT</button>
+                                <img src='images/loaders/indicator-lite.gif' class='m-r-sm form-progress hide'>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </section>
+              </div>
+
+              <!--register to be driver-->
+              <div class="row register-driver-row m-b-md hide">
+                <section class="panel panel-default">
+                  <header class="panel-heading font-bold">BECOME A DRIVER</header>
+                  <div class="panel-body">
+                    <form role="form" class="form-horizontal" name="register_driver" id="register_driver">
+                      <input type="hidden" class="ignore" name="actions" id="actions" value="register_driver">
+                      <input type="hidden" class="ignore" name="action_title" id="action_title" value="DRIVER DETAILS">
+                      <input type="hidden" class="ignore" name="user_id" id="user_id" value="" />
+                      <input type="hidden" class="ignore" name="token" id="token" value="" />
+                      <input type="hidden" class="ignore" name="device_platform" id="device_platform" value="" />
+                      <input type="hidden" class="ignore required_field" data_error="Please attach picture of your car" name="car_uri_check" id="car_uri_check" value="" />
+                      <input type="hidden" data_error="Please attach picture of your license" class="ignore required_field" name="license_uri_check" id="license_uri_check" value="" />
+                      
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <h4>DRIVER DETAILS</h4>
+                          <p>To become a Uride driver please fill in your drivers details and attach all required images and you will be able to pick and drop around compass.</p>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>VEHICLE REG #</label>
+                              <input type="text" name="car_reg" id="car_reg" class="form-control required_field" data_error="Please fill in the vehicle reg number" value="">
+                            </div>
+                            <div class="col-sm-6">
+                              <label>CAR PICTURE</label><br>
+                              <button class="btn btn-default btn-info btn-md pic-upload" id="car_uri">
+                                <i class="fa fa-file-o text"></i>
+                                <span class="text">BROWSE</span>
+                              </button>
+                              <span class="text-mute hide car_uri_progress"></span>
+                            </div>                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <label>DRIVERS LICENSE</label><br>
+                              <button class="btn btn-default btn-info btn-md pic-upload" id="license_uri">
+                                <i class="fa fa-file-o text"></i>
+                                <span class="text">BROWSE</span>
+                              </button>
+                              <span class="text-mute hide license_uri_progress"></span>
+                            </div>                            
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-10">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" id="submit" class="btn btn-md btn-primary">SUBMIT</button>
+                                <img src='images/loaders/indicator-lite.gif' class='m-r-sm form-progress hide'>
+                              </div>
+                          </div>
+                        </div>
+                      </div>                      
+                    </form>
+                  </div>
+                </section>
+              </div>
+
+              <!--login-->
+              <div class="row login-row m-b-md hide">
+                <div class="col-sm-12">
+                  <div class="text-center" style="">
+                    <div class="thumb-md">
+                      <img src="images/avatar_default.jpg" class="img-circle b-a b-light b-3x">
+                    </div>
+                    <p class="h4 m-t m-b">Sign-in</p>
+                    <form name="login" id="login" class="panel-body wrapper-sm">
+                      <input type="hidden" class="ignore" name="actions" id="actions" value="login" />
+                      <input type="hidden" class="ignore" name="action_title" id="action_title" value="LOGIN">
+
+                      <div class="form-group">
+                        <input type="text" name="username" id="username" placeholder="Username" class="form-control input-sm required_field" data_error="Please fill in your username">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" name="pswd" id="pswd" placeholder="password" class="form-control input-sm required_field" data_error="Please fill in your password">
+                      </div>
+                      <!--<a href="#" class="pull-right m-t-xs"><small>Forgot password?</small></a>-->
+                      <div class="form-group">
+                        <button type="submit" id="submit" class="btn btn-primary btn-block">Sign in</button>
+                        <img src='images/loaders/preloader.gif' class='m-r-sm form-progress hide'>
+                      </div>
+                      <!--<div class="line line-dashed"></div>
+                      <a href="register.html" class="pull-left m-t-xs" nav-link="register-row"><small>Create an account</small></a> <span class=""> | </span> <a href="#" class="pull-right m-t-xs text-white" nav-link="forgot-password-row"><small>Forgot password?</small></a> -->     
+                    </form>
+                  </div>
+                </div>                
+              </div>
+
+              <!--chats-->
+              <div class="row chats-row m-b-md hide">
+                <div class="col-sm-12">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                      <h4>Chats</h4>
+                    </header>
+                    <ul class="list-group alt chats-list"></ul>
+                  </section>
+                </div>
+              </div>
+
+              <!--chat messages-->
+              <div class="row chat-messages-row m-b-md hide">
+                <section class="vbox">
+                  <header class="header bg-light bg-gradient">
+                    <ul class="nav nav-tabs nav-white">
+                        <li class="active"><a href="#chat_messages" data-toggle="tab">CHAT</a></li>
+                        <li class=""><a href="#location" data-toggle="tab">LOCATION</a></li>                       
+                    </ul>
+                  </header>
+                  <section class="scrollable">
+                    <div class="tab-content">
+                        <div class="tab-pane" id="location">
+                          <div class="wrapper map-details">
+                            <div id="map_content" class="col-sm-12">
+                              <div id="mapit">
+                                <img src='images/loaders/squares-circle.gif'>LOADING LOCATION ...
+                              </div>
+                            </div>
+                          </div>
+                          <div class="wrapper no-map-details hide">
+                              <p></p>
+                          </div>                         
+                        </div>
+                        <div class="tab-pane  active" id="chat_messages">
+                          <section class="scrollable">
+                              <div class="wrapper">
+                                <section class="panel panel-default">
+                                  <header class="panel-heading">Chat</header>
+                                  <section class="chat-messages-list panel-body slim-scroll" data-height="230px">
+                                                              
+                                  </section>
+                                  <footer class="panel-footer">
+                                    <article class="chat-item" id="chat-form">
+                                      <a class="pull-left thumb-sm avatar"><img src="images/avatar_default.jpg" class="img-circle"></a>
+                                      <section class="chat-body">
+                                        <form role="form" class="m-b-none" name="taxi_call_chat" id="taxi_call_chat">
+                                          <input type="hidden" class="ignore" name="actions" id="actions" value="taxi_call_chat">
+                                          <input type="hidden" class="ignore" name="action_title" id="action_title" value="CHAT">
+                                          <input type="hidden" class="ignore" name="user_id" id="user_id" value="">
+                                          <input type="hidden" class="ignore" name="responder" id="responder" value="">
+                                          <input type="hidden" class="ignore" name="chat_id" id="chat_id" value="">
+                                          <div class="input-group">
+                                            <input type="text" class="form-control required_field" name="response" id="response" placeholder="">
+                                            <span class="input-group-btn">
+                                              <button type="submit" id="submit" class="btn btn-default" type="button">SEND</button>
+                                              <img src='images/loaders/indicator-lite.gif' class='m-r-sm form-progress hide'>
+                                            </span>
+                                          </div>
+                                        </form>
+                                      </section>
+                                    </article>
+                                  </footer>
+                                </section>
+                              </div>
+                          </section>                         
+                        </div>                       
+                    </div>
+                  </section>
+                </section>
+              </div>
+
+              <!--drivers list--> 
+              <div class="row drivers-row m-b-md hide">
+                <div class="col-sm-12">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                      <h4 class="num-drivers"></h4>
+                    </header>
+                    <ul class="list-group alt drivers-list"></ul>
+                  </section>
+                </div>
+              </div>
+              <!--terms and conditions--> 
+              <div class="row terms-conditions-row m-b-md hide">
+                <div class="col-sm-12">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                      <h4 >Terms and Conditions</h4>
+                    </header>
+                    <div class="col-sm-12">
+                      <p>
+                        Please read and understand these Terms and Conditions carefully before using the http://www.ubunturide.com (when we have a website) website and the Ubuntu Ride mobile application and any services as rendered by our company.
+                      </p>
+                      <p>
+                        <b>Binding process</b><br>
+                        These Terms and conditions apply to all users of the mobile application, visitors of the website and all who access any of our services directly or indirectly.Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms and conditions.
+                      </p>
+                      <p>
+                        By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms as shall be given, then you may not access any of our Services.
+                      </p>
+                      <p>
+                        <b>General Content</b><br>
+                        For purposes of these terms and condition, Ubuntu Ride (URide) shall be identified as a mobile application that facilitates ridesharing amongst students by connecting students who need a ride with student drivers that can offer such a service.
+                      </p>
+                      <p>
+                        The mobile application is exclusively available for use and access by students (identifiable by student numbers) with the exception of stuff members and or any other party closely linked to the University (identifiable by a stuff number).
+                      </p>
+                      <p>
+                        The company reserves discretionary rights to extend use and access of app to individuals that are neither students nor stuff members where reasonable need arises but such extension will not distort the company’s vision and mission in respect to operation of the app.
+                      </p>
+                      <p>
+                        The application shall be downloaded for free from the app store and used in a dignified manner that upholds the vision and mission of the app.
+                      </p>
+                      <p>
+                      A fee for every ride to be paid to the driver as gratitude but such to be reasonable and determinable by company depending on geographical location, distance to be covered by driver and any other variables linked to the service as might be.
+                      </p>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
+            </section>
+          </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+        <aside class="bg-light lter b-l aside-md hide" id="notes">
+          <div class="wrapper">Notification</div>
+        </aside>
+      </section>
+    </section>
+  </section>
+  
+  <script src="js/bootstrap.js"></script>
+  <!-- App -->
+  <script src="js/app_variables.js"></script>
+  <script src="js/app_functions.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/app.plugin.js"></script>
+  <script src="js/sql_functions.js"></script>
+
+  <script src="js/push_functions.js"></script>
+
+  <!-- fuelux -->
+  <script src="js/libs/underscore-min.js"></script>
+  <script src="js/fuelux/fuelux.js"></script>
+  <script src="js/sortable/jquery.sortable.js"></script>
+
+  <script src="js/slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+  <script src="js/charts/sparkline/jquery.sparkline.min.js"></script>
+  <script src="js/charts/flot/jquery.flot.min.js"></script>
+  <script src="js/charts/flot/jquery.flot.tooltip.min.js"></script>
+  <script src="js/charts/flot/jquery.flot.resize.js"></script>
+  <script src="js/charts/flot/jquery.flot.orderBars.js"></script>
+  <script src="js/charts/flot/jquery.flot.pie.min.js"></script>
+  <script src="js/charts/flot/jquery.flot.grow.js"></script>
+
+  <!-- calendar -->
+  <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="js/jquery.ui.touch-punch.min.js"></script>
+  <script src="js/calendar/bootstrap_calendar.js"></script>
+  <script src="js/fullcalendar/fullcalendar.min.js"></script>
+
+  <!-- wysiwyg -->
+  <script src="js/wysiwyg/jquery.hotkeys.js"></script>
+  <script src="js/wysiwyg/bootstrap-wysiwyg.js"></script>
+
+  <!-- file input -->  
+  <script src="js/file-input/bootstrap-filestyle.min.js"></script>
+
+  <!--upload scripts-->
+  <script src="js/vendor/jquery.ui.widget.js"></script>
+  <script src="js/jquery.iframe-transport.js"></script>
+  <script src="js/jquery.fileupload.js"></script>
+
+  <!-- datepicker -->
+  <script src="js/datepicker/bootstrap-datepicker.js"></script>
+  <script src="js/select2/select2.min.js"></script>
+
+  <!-- combodate -->
+<script src="js/libs/moment.min.js"></script>
+<script src="js/combodate/combodate.js"></script>
+<script src="js/markdown/epiceditor.min.js"></script>
+
+</body>
+</html>
