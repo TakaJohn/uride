@@ -14,7 +14,6 @@ function onNotificationAPN(e) {
                   '<p class="m-b-none">'+e.alert+'</p>'+
                   '</div>'+
                   '</div>'+
-                  /*'<small class="text-muted"><i class="fa fa-ok text-success"></i> 2 minutes ago</small>'+*/
                   '</section>'+
                   '</article>';
 
@@ -33,13 +32,11 @@ function onNotificationAPN(e) {
 	}
 }
 
-function tokenSuccessHandler (result) {
-	if(user_push_token !== result){				
-		user_push_token = result;				
-		if(user_id !== null){
-			var post_data = "actions=update_push_token&user_id="+user_id+"&device=android&token="+result;	
-			query_server(post_data, "GET", "push_token_update_result");
-		}
+function tokenSuccessHandler (result) {		
+	user_push_token = result;				
+	if(user_id !== null){
+		var post_data = "actions=update_push_token&user_id="+user_id+"&device=android&token="+result;	
+		query_server(post_data, "GET", "push_token_update_result");
 	}
 }
 
@@ -49,7 +46,7 @@ function tokenErrorHandler (error) {
 
 /******ANDROID FUNCTIONS******/
 
-function pushSuccessHandler (result) {
+/*function pushSuccessHandler (result) {
    //console.log("Success registering Push ID: "+result);
    //window.localStorage.setItem("user_push_token", result); 
 }
@@ -89,7 +86,6 @@ function onNotificationGCM(e) {
                           '<p class="m-b-none">'+e.payload.message+'</p>'+
                           '</div>'+
                           '</div>'+
-                          /*'<small class="text-muted"><i class="fa fa-ok text-success"></i> 2 minutes ago</small>'+*/
                           '</section>'+
                           '</article>';
 

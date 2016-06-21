@@ -23,7 +23,7 @@
 
   <script src="cordova.js"></script>
   <script src="js/jquery.min.js"></script>
-  <script src="js/PushNotification.js"></script>
+  <script src="push.js"></script>
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyATKM97y1jeNjfGRzLCnBHg0zUq7XNhVC8&signed_in=true"></script>
   
 
@@ -515,63 +515,51 @@
 
               <!--chat messages-->
               <div class="row chat-messages-row m-b-md hide">
-                <section class="vbox">
-                  <header class="header bg-light bg-gradient">
-                    <ul class="nav nav-tabs nav-white">
-                        <li class="active"><a href="#chat_messages" data-toggle="tab">CHAT</a></li>
-                        <li class=""><a href="#location" data-toggle="tab">LOCATION</a></li>                       
-                    </ul>
-                  </header>
-                  <section class="scrollable">
-                    <div class="tab-content">
-                        <div class="tab-pane" id="location">
-                          <div class="wrapper map-details">
-                            <div id="map_content" class="col-sm-12">
-                              <div id="mapit">
-                                <img src='images/loaders/squares-circle.gif'>LOADING LOCATION ...
-                              </div>
-                            </div>
-                          </div>
-                          <div class="wrapper no-map-details hide">
-                              <p></p>
-                          </div>                         
+                <div class="col-md-12">
+                  <!--map details-->
+                  <section class="panel panel-default hide location-details">
+                    <header class="panel-heading">Location Map</header>
+                    <div class="wrapper map-details">
+                      <div id="map_content" class="col-sm-12">
+                        <div id="mapit">
+                          <img src='images/loaders/squares-circle.gif'>LOADING LOCATION ...
                         </div>
-                        <div class="tab-pane  active" id="chat_messages">
-                          <section class="scrollable">
-                              <div class="wrapper">
-                                <section class="panel panel-default">
-                                  <header class="panel-heading">Chat</header>
-                                  <section class="chat-messages-list panel-body slim-scroll" data-height="230px">
-                                                              
-                                  </section>
-                                  <footer class="panel-footer">
-                                    <article class="chat-item" id="chat-form">
-                                      <a class="pull-left thumb-sm avatar"><img src="images/avatar_default.jpg" class="img-circle"></a>
-                                      <section class="chat-body">
-                                        <form role="form" class="m-b-none" name="taxi_call_chat" id="taxi_call_chat">
-                                          <input type="hidden" class="ignore" name="actions" id="actions" value="taxi_call_chat">
-                                          <input type="hidden" class="ignore" name="action_title" id="action_title" value="CHAT">
-                                          <input type="hidden" class="ignore" name="user_id" id="user_id" value="">
-                                          <input type="hidden" class="ignore" name="responder" id="responder" value="">
-                                          <input type="hidden" class="ignore" name="chat_id" id="chat_id" value="">
-                                          <div class="input-group">
-                                            <input type="text" class="form-control required_field" name="response" id="response" placeholder="">
-                                            <span class="input-group-btn">
-                                              <button type="submit" id="submit" class="btn btn-default" type="button">SEND</button>
-                                              <img src='images/loaders/indicator-lite.gif' class='m-r-sm form-progress hide'>
-                                            </span>
-                                          </div>
-                                        </form>
-                                      </section>
-                                    </article>
-                                  </footer>
-                                </section>
-                              </div>
-                          </section>                         
-                        </div>                       
+                      </div>
+                    </div>
+                    <div class="wrapper no-map-details hide">
+                        <p></p>
                     </div>
                   </section>
-                </section>
+
+                  <!--chat messages-->
+                  <section class="panel panel-default">
+                    <header class="panel-heading">Chat(s)</header>
+                    <section class="chat-messages-list panel-body slim-scroll" data-height="350px">
+                                                
+                    </section>
+                    <footer class="panel-footer">
+                      <article class="chat-item" id="chat-form">
+                        <a class="pull-left thumb-sm avatar"><img src="images/avatar_default.jpg" class="img-circle"></a>
+                        <section class="chat-body">
+                          <form role="form" class="m-b-none" name="taxi_call_chat" id="taxi_call_chat">
+                            <input type="hidden" class="ignore" name="actions" id="actions" value="taxi_call_chat">
+                            <input type="hidden" class="ignore" name="action_title" id="action_title" value="CHAT">
+                            <input type="hidden" class="ignore" name="user_id" id="user_id" value="">
+                            <input type="hidden" class="ignore" name="responder" id="responder" value="">
+                            <input type="hidden" class="ignore" name="chat_id" id="chat_id" value="">
+                            <div class="input-group">
+                              <input type="text" class="form-control required_field" name="response" id="response" placeholder="">
+                              <span class="input-group-btn">
+                                <button type="submit" id="submit" class="btn btn-default" type="button">SEND</button>
+                                <img src='images/loaders/indicator-lite.gif' class='m-r-sm form-progress hide'>
+                              </span>
+                            </div>
+                          </form>
+                        </section>
+                      </article>
+                    </footer>
+                  </section>
+                </div>
               </div>
 
               <!--drivers list--> 

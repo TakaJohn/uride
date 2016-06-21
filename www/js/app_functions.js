@@ -10,11 +10,23 @@ function onDeviceReady() {
   device_model      = device.model.toLowerCase();     //device model e.g Nexus One       returns "Passion
   device_version    = device.version.toLowerCase();   // device operating system version Froyo OS would return "2.2"
   
-  if(device_platform == 'android' || device_platform == 'Android'){
+  /*if(device_platform == 'android' || device_platform == 'Android'){
     pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID": "210701936697", "ecb": "onNotificationGCM"});
   }else{
     pushNotification.register(tokenSuccessHandler, tokenErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});  // required!
-  }
+  }*/
+
+  var push = PushNotification.init({
+      android: {
+          senderID: "210701936697"
+      },
+      ios: {
+          alert: "true",
+          badge: "true",
+          sound: "true"
+      },
+      windows: {}
+  });
 
   //networkDetection
   var networkState = navigator.connection.type;
@@ -28,7 +40,7 @@ function onDeviceReady() {
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
     if (states[networkState] !== 'No network connection' || states[networkState] == 'Unknown connection') {
-      console.log("Connection State: "+states[networkState]);
+      //console.log("Connection State: "+states[networkState]);
     isConnected = true;
   }
 
@@ -48,7 +60,7 @@ function onDeviceReady() {
   //executeCallback 
   var pages = currentUrl.split("/"); // get the name of the current html page
   currentPage = pages[pages.length - 1].slice(0, pages[pages.length - 1].indexOf(".html"));
-  console.log("CURRENT PAGE: "+currentPage);
+  //console.log("CURRENT PAGE: "+currentPage);
 
   // capitalize the first letter and execute the function
   //currentPage = currentPage.charAt(0).toUpperCase() + currentPage.slice(1);
@@ -69,12 +81,12 @@ function onOffline() {
 
 function onPause() {
   isPhoneGapReady = false;
-  console.log("ON PAUSE");
+  //console.log("ON PAUSE");
 }
 
 function onResume() {
   // don't run if phonegap is already ready
-  console.log("ON RESUME");
+  //console.log("ON RESUME");
   if (isPhoneGapReady == false) {
     init(currentUrl);
   }
@@ -400,19 +412,19 @@ function profile_row(data){
   if(user_student_pic !== null || user_student_pic !== undefined){
     $("#update_user .id_card_uri_1_progress").html(' <i class="fa fa-thumbs-up text"></i> image attached').removeClass('hide');
     $("#update_user #id_card_uri_1_check").val(user_student_pic);
-    console.log("USER STUDENT PIC: "+user_student_pic);
+    //console.log("USER STUDENT PIC: "+user_student_pic);
   }
 
   if(user_car_pic !== null || user_car_pic !== undefined){
     $("#update_user .car_uri_1_progress").html(' <i class="fa fa-thumbs-up text"></i> image attached').removeClass('hide');
     $("#update_user #car_uri_1_check").val(user_car_pic);
-    console.log("USER CAR: "+user_car_pic);
+    //console.log("USER CAR: "+user_car_pic);
   }
 
   if(user_license !== null || user_license !== undefined){
     $("#update_user .license_uri_1_progress").html(' <i class="fa fa-thumbs-up text"></i> image attached').removeClass('hide');
     $("#update_user #license_uri_1_check").val(user_license);
-    console.log("USER LICENSE: "+user_license);
+    //console.log("USER LICENSE: "+user_license);
   }
 }
 
@@ -428,7 +440,7 @@ function drivers_row(data){
         var post_data = "actions=taxi_call&user_id="+user_id+"&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude;
         $.post(request_url+"?data="+btoa(post_data), function(data) {
           var info = $.parseJSON(data);
-          console.log(info);
+          //console.log(info);
           if (info.hasOwnProperty("query_status")){
             if(info.query_status == 1){
               $( document ).find('.active-row').addClass('hide').removeClass('active-row');
@@ -485,7 +497,7 @@ function drivers_row(data){
          var post_data       = "actions=taxi_call&user_id="+user_id+"&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude;
          $.post(request_url+"?data="+btoa(post_data), function(data) {
            var info = $.parseJSON(data);
-           console.log(info);
+           //console.log(info);
            if (info.hasOwnProperty("query_status")){
              if(info.query_status == 1){
               $( document ).find('.active-row').addClass('hide').removeClass('active-row');
@@ -550,11 +562,12 @@ function drivers_row(data){
 function chat_messages_row(data){
   document.title = "CHAT DETAILS";
   $(".navbar-brand").html(user_client);
+  $(".location-details").addClass('hide');
 
   $( document ).find('.active-row').addClass('hide').removeClass('active-row');
   $(".chat-messages-row").removeClass('hide').addClass('active-row');
 
-  console.log(data);
+  //console.log(data);
 
   var num_variable  = data.length - 1;
 
@@ -577,11 +590,12 @@ function chat_messages_row(data){
   //GET LOCATION DETAILS
   post_data         = "actions=taxi_call_details&user_id="+user_id+"&id="+chat_id;
   $.post(request_url+"?data="+btoa(post_data), function(data) {
-    console.log(data);
+    //console.log(data);
     try{
       var info = $.parseJSON(data);    
       
       if(info.details.latitude && info.details.longitude){
+        $(".location-details").removeClass('hide');
         set_up_google_map(info.details.latitude, info.details.longitude);        
       }else{
         $("#mapit").html("no map details");
@@ -603,12 +617,14 @@ function set_up_google_map(latitude, longitude){
   var map;
   //var W = $(".map-details").width();
   var W = $(window).width() - 60; 
-  var H = $(window).height();
+  //var H = $(window).height();
+  var H = $(window).width();
   var infowindow = null;
   var window_content;
   var i = 0;
 
   $("#mapit").html("<img src='images/loaders/squares-circle.gif'>LOADING LOCATION ...");
+  
   if (typeof google === 'object' && typeof google.maps === 'object') {
     clientPostion = new google.maps.LatLng(latitude, longitude);
     $('#mapit').width(W+"px").height(H+"px");
@@ -712,7 +728,7 @@ function deploy_taxi_result(data){
     if (data.hasOwnProperty("query_status")){
       if(data.query_status == 0){
         load_modal(err_string(data.msg), "GET A RIDE");
-        console.log(data.dbh_err);
+        //console.log(data.dbh_err);
       }
 
       if(data.query_status == 1){
@@ -720,8 +736,8 @@ function deploy_taxi_result(data){
           $("#taxi_call_chat #user_id").val(user_id);
           $("#taxi_call_chat #responder").val(data.responder);
 
-          console.log("RESPONDER: "+data.responder);
-          console.log("CHAT ID: "+data.id);
+          //console.log("RESPONDER: "+data.responder);
+          //console.log("CHAT ID: "+data.id);
 
           save_message(user_id, data.responder, data.id, data.name, "Need a ride are you available :)", full_today_date, 1, 1)
 
@@ -764,11 +780,11 @@ function taxi_call_chat_result(data){
     if (data.hasOwnProperty("query_status")){
       if(data.query_status == 0){
         load_modal(err_string(data.msg), "GET A RIDE");
-        console.log(data.dbh_err);
+        //console.log(data.dbh_err);
       }
       if(data.query_status == 1){
-        console.log("RESPONDER: "+data.responder);
-          console.log("CHAT ID: "+data.id);
+        //console.log("RESPONDER: "+data.responder);
+        //console.log("CHAT ID: "+data.id);
         save_message(user_id, data.responder, data.id, data.name, data.response, full_today_date, 1, 1);
 
         var listData  = '<article id="chat-id-1" class="chat-item right">'+
@@ -804,7 +820,7 @@ function update_emergency_call_details_result(data){
     if (data.hasOwnProperty("query_status")){
       if(data.query_status == 0){
         load_modal(err_string(data.msg), "EMERGENCY CALL DETAILS");
-        console.log(data.dbh_err);
+        //console.log(data.dbh_err);
       }
       if(data.query_status == 1){
         load_modal(success_string(data.msg), "EMERGENCY CALL DETAILS");
@@ -1684,7 +1700,7 @@ function user_details(data){
         var listData = "";
         if(data.emergency_calls){
           $.each(data.emergency_calls, function(k, v) {
-            console.log(k+"-"+v);
+            //console.log(k+"-"+v);
             listData += "<tr>";
               listData += "<td>"+v.name+"</td>";
               listData += "<td>"+v.type+"</td>";
@@ -1700,7 +1716,7 @@ function user_details(data){
         var listData = "";
         if(data.dependents){
           $.each(data.dependents, function(k, v) {
-            console.log(k+"-"+v);
+            //console.log(k+"-"+v);
             listData += "<tr>";
               listData += "<td>"+v.name+"</td>";
               listData += "<td>"+v.status+"</td>";
@@ -2408,7 +2424,7 @@ function invoice(data){
         var client = data.client;
         if(client.details.logo){
           $(".invoice-logo").html("<img src='"+logo_uri+"thumbnail/"+client.details.logo+"'>");
-          console.log(client.details.logo);
+          //console.log(client.details.logo);
         }
         $(".client-name").html(client.details.name);
         $(".client-address").html(client.details.address+"<br>"+client.details.area+" "+client.details.city);
@@ -2520,7 +2536,7 @@ function settings(data){
         $("#mobile").val(details.mobile);
         $("#email").val(details.email);
 
-        console.log(data.settings.communications)
+        //console.log(data.settings.communications)
         var communications = data.settings.communications;
         $("#smtp_host").val(communications.smtp_host);
         $("#smtp_port").val(communications.smtp_port);
@@ -2532,7 +2548,7 @@ function settings(data){
         $("#marketing_email").val(communications.marketing_email);
 
         var financials = data.settings.financials;
-        console.log(financials);
+        //console.log(financials);
         $("#vat").val(financials.vat);
         $("#vat_number").val(financials.vat_number);
         $("#bank").val(financials.bank);
@@ -2581,17 +2597,17 @@ function push_token_update_result(data){
     if (data.hasOwnProperty("query_status")){
       if(data.query_status == 0){
         //load_modal(err_string(data.msg), "COMPANY DETAILS");
-        console.log("error updating pushtoken");
+        //console.log("error updating pushtoken");
       }
       if(data.query_status == 1){
         //load_modal(success_string(data.msg), "COMPANY DETAILS");
-        console.log("pushtoken successfully updated");
+        //console.log("pushtoken successfully updated");
       }
     }else{
-      console.log("ERROR UPDATING PUSH TOKEN. CHECK INTERNET CONNECTION");
+      //console.log("ERROR UPDATING PUSH TOKEN. CHECK INTERNET CONNECTION");
     }  
   }else{
-    console.log("ERROR UPDATING PUSH TOKEN. CHECK INTERNET CONNECTION");  
+    //console.log("ERROR UPDATING PUSH TOKEN. CHECK INTERNET CONNECTION");  
   }
 }
 
