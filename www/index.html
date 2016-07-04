@@ -66,12 +66,20 @@
                 </div>
                 <!--inactive user menu-->
                 <div class="inactive-user text-center hide">
-                  <div class="col-sm-12">
-                    <div class="doc-buttons">               
-                      <a href="#" class="btn btn-s-md btn-primary nav" nav-link="register-row">Register</a>
-                      <a href="#" class="btn btn-s-md btn-info nav" nav-link="login-row">Login</a>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="doc-buttons">               
+                        <a href="#" class="btn btn-s-md btn-primary nav" nav-link="register-row">Register</a>
+                        <a href="#" class="btn btn-s-md btn-info nav" nav-link="login-row">Login</a>
+                      </div>
+                    </div> 
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 text-center">
+                      <span class="text-"><a href="#" nav-link="forgot-password-row">Forgot my password</a></span>
                     </div>
-                  </div>      
+                  </div>
+                       
                 </div>
                 <!--active user menu-->
                 <div class="active-user hide">
@@ -496,6 +504,30 @@
                       </div>
                       <!--<div class="line line-dashed"></div>
                       <a href="register.html" class="pull-left m-t-xs" nav-link="register-row"><small>Create an account</small></a> <span class=""> | </span> <a href="#" class="pull-right m-t-xs text-white" nav-link="forgot-password-row"><small>Forgot password?</small></a> -->     
+                    </form>
+                  </div>
+                </div>                
+              </div>
+
+              <!--forgot password-->
+              <div class="row forgot-password-row m-b-md hide">
+                <div class="col-sm-12">
+                  <div class="text-center">
+                    <div class="thumb-md">
+                      <img src="images/avatar_default.jpg" class="img-circle b-a b-light b-3x">
+                    </div>
+                    <p class="h4 m-t m-b">Forgot your password!!!<br> Not to worry just fill in the email address you used to register and we will reset it for you.</p>
+                    <form name="forgot_password" id="forgot_password" class="panel-body wrapper-sm">
+                      <input type="hidden" class="ignore" name="actions" id="actions" value="forgot_password" />
+                      <input type="hidden" class="ignore" name="action_title" id="action_title" value="FORGOT PASSWORD">
+
+                      <div class="form-group">
+                        <input type="email" name="email" id="email" placeholder="me@myemail.com" class="form-control input-sm required_field" data_error="Please fill in your email address">
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" id="submit" class="btn btn-primary btn-block">Reset</button>
+                        <img src='images/loaders/preloader.gif' class='m-r-sm form-progress hide'>
+                      </div>    
                     </form>
                   </div>
                 </div>                
